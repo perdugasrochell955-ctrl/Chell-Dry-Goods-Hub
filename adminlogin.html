@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login • Chell Dry Goods Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .auth-card {
+      max-width: 420px;
+      margin: 40px auto;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      color: var(--text);
+      text-align: center;
+}
+.auth-card form {
+  text-align: left;  /* para left alignment ang Email ug Password */
+  margin-top: 20px;
+}
+    .logo {
+  display: block;
+  margin: 0 auto 16px;
+  width: 120px; /* adjust size if needed */
+}
+    .auth-card h1 { color: var(--text); }
+    .auth-card p { color: var(--muted); }
+    .field { display:grid; gap:6px; margin-bottom:14px; }
+    .field label { font-weight:600; color:#5d4822; }
+    .field input {
+      background:#fffdf3;
+      color:#2b1f0a;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:12px 14px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .field input:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(184,146,53,0.2);
+      outline:none;
+    }
+    .hint { color: var(--muted); font-size: 0.9rem; margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"> <span></span></a>
+      <nav class="nav">
+        <a href="index.html#home" class="nav-link">Home</a>
+        <a href="index.html#products" class="nav-link">Shop</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </nav>
+      <div class="auth">
+        <a class="btn btn-link" href="customerlogin.html">Customer login</a>
+        <a class="btn btn-primary" href="register.html">Create account</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main class="container" style="padding: 28px 0 40px;">
+    <div class="auth-card">
+      <img src="assets/img/basket.png" alt="Chell Dry Goods Hub" class="logo">
+      <h1 style="margin:0 0 6px;">Admin Login</h1>
+      <p class="muted" style="margin:0 0 16px;"></p>
+
+      <form>
+        <div class="field">
+          <label for="identifier">Email or Username</label>
+          <input type="text" id="identifier" placeholder="admin@example.com">
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Your admin password">
+        </div>
+
+        <div style="display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+          <button type="button" class="btn btn-primary" onclick="window.location='admindashboard.html'">Enter dashboard</button>
+          <a href="#" class="btn btn-link">Forgot password?</a>
+        </div>
+      </form>
+
+      <p class="hint"></p>
+    </div>
+  </main>
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.querySelector('.nav');
+    hamburger?.addEventListener('click', () => {
+      const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', String(!expanded));
+      nav?.classList.toggle('open');
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+

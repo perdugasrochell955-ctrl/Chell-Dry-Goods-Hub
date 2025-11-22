@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard • Chell Dry Goods Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"><script src="js/script.js"></script>
+  <link rel="stylesheet" href="dashboard.css"><script src="js/script.js"></script>
+  <style>
+    .admin-wrapper { padding: 28px 0 40px; }
+    .admin-grid { display: grid; grid-template-columns: 260px 1fr; gap: 24px; align-items: flex-start; }
+    .panel { background: rgba(202, 183, 139, 0.88); border: 1px solid rgba(232, 229, 223, 0.79); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
+    .side-actions button { width: 100%; }
+    .summary-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap:14px; }
+    .summary-card { background: rgba(227, 226, 222, 0.741); border:1px solid rgba(255, 255, 255, 0.812); border-radius:14px; padding:16px; }
+    .summary-card .label { font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); margin-bottom:6px; }
+    .summary-card .value { font-size:1.4rem; font-weight:600; }
+    .orders-board { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:14px; }
+    .orders-column { background: rgba(228, 223, 223, 0.855); border:1px solid rgba(255, 255, 255, 0.686); border-radius:14px; padding:14px; }
+    .orders-card { background: rgba(225, 227, 231, 0.8); border:1px solid rgba(255, 255, 255, 0.784); border-radius:12px; padding:12px; margin-bottom:10px; }
+    .tag { display:inline-block; padding:4px 10px; border-radius:999px; font-size:0.8rem; text-transform:capitalize; }
+    .tag.low { background: rgba(227, 225, 222, 0.834); border:1px solid rgba(228, 222, 217, 0.766); }
+    .tag.critical { background: rgba(231, 224, 224, 0.871); border:1px solid rgba(231, 224, 224, 0.737); }
+    .tag.watch { background: rgba(228, 228, 231, 0.87); border:1px solid rgba(226, 227, 232, 0.886); }
+    table { width:100%; border-collapse:collapse; }
+    th, td { padding:10px 8px; border-bottom:1px solid rgba(255, 255, 255, 0.878); text-align:left; }
+    th { font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); }
+    .grid { display:grid; gap:18px; }
+    .grid.two { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .inline-actions { display:flex; gap:8px; flex-wrap:wrap; }
+    @media (max-width: 980px) {
+      .admin-grid { grid-template-columns: 1fr; }
+      aside.panel { position: static !important; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+    <aside class="sidebar"> ... </aside>  <!-- Sidebar menu -->
+<h1 style="margin:0 0 18px;">Dashboard overview</h1>
+          <div class="summary-grid">
+            <article class="summary-card">
+              <div class="label">Orders today</div>
+              <div class="value">18</div>
+              <div class="muted">+8% vs yesterday</div>
+            </article>
+            <article class="summary-card">
+              <div class="label">Revenue today</div>
+              <div class="value">₱18,650</div>
+              <div class="muted">₱1.2M MTD</div>
+            </article>
+            <article class="summary-card">
+              <div class="label">New customers</div>
+              <div class="value">12</div>
+              <div class="muted">3 awaiting approval</div>
+            </article>
+            <article class="summary-card">
+              <div class="label">Pending payouts</div>
+              <div class="value">4</div>
+              <div class="muted">Due Friday</div>
+            </article>
+            <article class="summary-card">
+              <div class="label">Open tickets</div>
+              <div class="value">5</div>
+              <div class="muted">2 urgent</div>
+            </article>
+            <article class="summary-card">
+              <div class="label">Low-stock SKUs</div>
+              <div class="value">7</div>
+              <div class="muted">Restock ETA 2 days</div>
+            </article>
+          </div>
+        </section>

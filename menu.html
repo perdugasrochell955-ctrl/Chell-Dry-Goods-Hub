@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu • Chell Dry Goods Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .menu-wrapper { padding: 40px 0 60px; }
+    .menu-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:20px; }
+    .menu-card { background: rgba(6, 18, 33, 0.9); border:1px solid rgba(255,255,255,0.08); border-radius:18px; padding:20px; box-shadow: var(--shadow); }
+    .menu-card h3 { margin:0 0 6px; }
+    .menu-card p { margin:0; color:var(--muted); }
+    .menu-card .price { font-weight:600; color:#dbeafe; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Chell <span>Dry Goods</span> Hub</a>
+      <nav class="nav">
+        <a href="index.html#home" class="nav-link">Home</a>
+        <a href="index.html#products" class="nav-link">Products</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </nav>
+      <div class="auth">
+        <a class="btn btn-link" href="customerlogin.html">Log in</a>
+        <a class="btn btn-primary" href="register.html">Create account</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main class="container menu-wrapper">
+    <header style="text-align:center; margin-bottom:28px;">
+      <p class="btn btn-secondary" style="width:fit-content; margin:0 auto 10px;">Wholesale menu</p>
+      <h1 style="margin:0;">Staple commodities ready for dispatch</h1>
+      <p class="muted" style="margin:10px 0 0;">All prices shown for 25kg–50kg sacks, VAT exclusive. Contact us for contract pricing.</p>
+    </header>
+
+    <section class="menu-grid">
+      <article class="menu-card">
+        <h3>Highland Black Rice</h3>
+        <p>Aromatic grains harvested in the Cordilleras, perfect for premium dining concepts.</p>
+        <div class="price">₱1,850 / 50kg sack</div>
+      </article>
+      <article class="menu-card">
+        <h3>Whole Corn Grits</h3>
+        <p>Stone-milled corn ideal for polenta, kakanin, and bakery applications.</p>
+        <div class="price">₱980 / 25kg sack</div>
+      </article>
+      <article class="menu-card">
+        <h3>Premium Cocoa Powder</h3>
+        <p>Alkalized cocoa with deep color and flavor for beverages and baking.</p>
+        <div class="price">₱1,680 / 20kg sack</div>
+      </article>
+      <article class="menu-card">
+        <h3>Handpicked Coffee Beans</h3>
+        <p>Medium roast blend sourced from Bukidnon and Benguet farmers.</p>
+        <div class="price">₱2,460 / 10kg bag</div>
+      </article>
+      <article class="menu-card">
+        <h3>Organic Mung Beans</h3>
+        <p>Sun-dried, machine-cleaned mung beans for retail repacking or commissary use.</p>
+        <div class="price">₱1,120 / 40kg sack</div>
+      </article>
+      <article class="menu-card">
+        <h3>Brown Sugar (Washed)</h3>
+        <p>Fine-milled unrefined sugar popular with cafés and bakeshops.</p>
+        <div class="price">₱1,050 / 50kg sack</div>
+      </article>
+    </section>
+
+    <section style="margin-top:40px; text-align:center;">
+      <h2>Need a custom mix?</h2>
+      <p class="muted">Send us your ingredient list and weekly volume so we can craft a bundled quotation.</p>
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <a class="btn btn-primary" href="mailto:sales@chelldrygoods.com">Email sales</a>
+        <a class="btn btn-outline" href="tel:+639171234567">Call logistics</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>© <span id="year"></span> Chell Dry Goods Hub</p>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.querySelector('.nav');
+    hamburger?.addEventListener('click', () => {
+      const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', String(!expanded));
+      nav?.classList.toggle('open');
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chell Dry Goods Hub • Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page { min-height: 100dvh; display:flex; align-items:center; justify-content:center; padding: 24px; }
+    .card { width:min(680px, 96%); background: var(--card); border:1px solid var(--border); border-radius: 18px; padding: 22px; text-align:center; box-shadow: var(--shadow); }
+    .logo { width: 96px; height: 96px; object-fit: contain; display:block; margin: 6px auto 8px; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.35)); }
+    .btns { display:flex; flex-wrap: wrap; gap: 10px; justify-content:center; margin-top: 14px; }
+    h1 { margin: 6px 0 6px; }
+    footer { margin-top: 14px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <!-- Logo -->
+      <img src="images/basket.png" alt="Chell Dry Goods Hub" class="logo">
+
+      <!-- Title -->
+      <h1>Chell Dry Goods Hub</h1>
+
+      <!-- Buttons (mapped to existing PHP pages) -->
+      <div class="btns">
+        <a href="login.php?role=admin" class="btn btn-secondary">Admin Login</a>
+        <a href="login.php" class="btn btn-primary">Customer Login</a>
+        <a href="customer.php" class="btn btn-outline">Dashboard</a>
+        <a href="register.php" class="btn btn-secondary">Register</a>
+        <a href="customer.php#profile" class="btn btn-outline">Update</a>
+        <a href="customer.php#profile" class="btn btn-outline">Delete</a>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <p>&copy; <span id="year"></span> Chell Dry Goods Hub</p>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

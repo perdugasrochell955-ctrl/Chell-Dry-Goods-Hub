@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account • Chell Dry Goods Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .auth-card {
+      max-width: 520px;
+      margin: 34px auto;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      color: var(--text);
+      text-align: center;
+    }
+    .auth-card form {
+  text-align: left;  /* para left alignment ang Email ug Password */
+  margin-top: 20px;
+}
+    .logo {
+  display: block;
+  margin: 0 auto 16px;
+  width: 120px; /* adjust size if needed */
+}
+    .auth-card h1 { color: var(--text); }
+    .auth-card p { color: var(--muted); }
+    .field {
+      display: grid;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .field label {
+      font-weight: 600;
+      color: #5d4822;
+    }
+    .field input {
+      background: #fffdf3;
+      color: #2b1f0a;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .field input:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(184,146,53,0.2);
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><span></span></a>
+      <nav class="nav">
+        <a href="index.html#home" class="nav-link">Home</a>
+        <a href="index.html#products" class="nav-link">Shop</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </nav>
+      <div class="auth">
+        <a class="btn btn-link" href="customerlogin.html">Log in</a>
+        <a class="btn btn-primary" href="adminlogin.html">Admin</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main class="container" style="padding: 28px 0 40px;">
+    <div class="auth-card">
+      <img src="assets/img/basket.png" alt="Chell Dry Goods Hub" class="logo">
+      <h1 style="margin:0 0 6px;">Create Account</h1>
+      <p class="muted" style="margin:0 0 16px;"></p>
+
+      <form>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="you@example.com">
+        </div>
+        <div class="field">
+          <label for="phone">Phone number</label>
+          <input type="tel" id="phone" placeholder="+63 900 000 0000">
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="At least 6 characters">
+        </div>
+        <div class="field">
+          <label for="confirm">Confirm password</label>
+          <input type="password" id="confirm" placeholder="Re-enter password">
+        </div>
+        <div class="field">
+          <label for="volume">Monthly volume</label>
+          <input type="text" id="volume" placeholder="e.g. 100 sacks / month">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Sign in</button>
+      </form>
+
+      <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Get form values
+          const email = document.getElementById('email').value;
+          const phone = document.getElementById('phone').value;
+          const password = document.getElementById('password').value;
+          const confirm = document.getElementById('confirm').value;
+          const volume = document.getElementById('volume').value;
+          
+          // Debug: Show what values we got
+          console.log('Form values:', { email, phone, password, confirm, volume });
+          
+          // Simple validation - just check if fields are not empty
+          if (!email || !phone || !password || !confirm || !volume) {
+            alert('Please fill in all fields');
+            console.log('Validation failed - empty fields');
+            return;
+          }
+          
+          if (password !== confirm) {
+            alert('Passwords do not match');
+            console.log('Validation failed - passwords do not match');
+            return;
+          }
+          
+          if (password.length < 6) {
+            alert('Password must be at least 6 characters');
+            console.log('Validation failed - password too short');
+            return;
+          }
+          
+          // Show success message
+          alert('Account created successfully!');
+          console.log('All validations passed, redirecting...');
+          
+          // Simple redirect - force it to work
+          setTimeout(function() {
+            console.log('Executing redirect...');
+            window.location.href = 'customerdashboard.html';
+          }, 1000);
+        });
+      </script>
+
+          </div>
+  </main>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.querySelector('.nav');
+    hamburger?.addEventListener('click', () => {
+      const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', String(!expanded));
+      nav?.classList.toggle('open');
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+

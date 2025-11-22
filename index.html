@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chell Dry Goods Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header" id="home">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><span></span></a>
+      <nav class="nav">
+        <a class="nav-link" href="#home">Home</a>
+        <a class="nav-link" href="#products">Products</a>
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#contact">Contact</a>
+      </nav>
+      <div class="auth">
+        <a class="btn btn-link" href="customerlogin.html">Log in</a>
+        <a class="btn btn-primary" href="register.html">Sign in</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <div style="flex: 1; text-align: left;">
+            <p class="btn btn-secondary" style="width: fit-content; margin:0 0 10px;"></p>
+            <h1>Whole grains, pulses, and essentials delivered nationwide.</h1>
+            <p>We help restaurants, bakeries, and community retailers keep shelves stocked with transparent pricing and reliable fulfillment.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="register.html">Open wholesale account</a>
+              <a class="btn btn-outline" href="#products">Browse catalog</a>
+            </div>
+          </div>
+        </div>
+        <div class="hero-logo" style="display: flex; align-items: center; justify-content: center;">
+          <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            <img src="assets/img/basket.png" alt="Chell Dry Goods Hub" style="width: 300px; height: 300px; object-fit: contain;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="about">
+      <div class="container">
+        <h2>Why partners choose Chell</h2>
+        <div class="feature-grid">
+          <article class="feature">
+            <div class="icon">🚚</div>
+            <h3>Same-week logistics</h3>
+            <p>Metro Manila next-day delivery and VisMin departures every Monday/Thursday.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">📦</div>
+            <h3>Consistent inventory</h3>
+            <p>Over 400 metric tons of dry goods staged across 3 regional warehouses.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">💬</div>
+            <h3>Dedicated support</h3>
+            <p>Merchandisers assist with forecasting, bundling, and quality assurance.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">💳</div>
+            <h3>Flexible payments</h3>
+            <p>Bank transfer, GCASH, or 30-day terms for qualified business accounts.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="products" id="products">
+      <div class="container">
+        <div class="section-head">
+          <h2>Featured collections</h2>
+          <p>Curated pieces for everyday style. Limited releases rotate weekly.</p>
+        </div>
+        <div class="product-grid">
+          <article class="product-card">
+            <div class="product-thumb" style="--img:url('https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80');"></div>
+            <h3>Structured Leather Bag</h3>
+            <p class="price">₱4,850.00</p>
+            <a class="btn btn-secondary" href="mailto:sales@chelldrygoods.com">Request quote</a>
+          </article>
+          <article class="product-card">
+            <div class="product-thumb" style="--img:url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80');"></div>
+            <h3>Monogram Sneakers</h3>
+            <p class="price">₱3,290.00</p>
+            <a class="btn btn-secondary" href="mailto:sales@chelldrygoods.com">Request quote</a>
+          </article>
+          <article class="product-card">
+            <div class="product-thumb" style="--img:url('https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=600&q=80');"></div>
+            <h3>Classic High Heels</h3>
+            <p class="price">₱2,960.00</p>
+            <a class="btn btn-secondary" href="mailto:sales@chelldrygoods.com">Request quote</a>
+          </article>
+          <article class="product-card">
+            <div class="product-thumb" style="--img:url('https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80');"></div>
+            <h3>Tailored Linen Pants</h3>
+            <p class="price">₱1,980.00</p>
+            <a class="btn btn-secondary" href="mailto:sales@chelldrygoods.com">Request quote</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container">
+        
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>support@chelldrygoods.com</li>
+          <li>+63 917 123 4567</li>
+          <li>Valenzuela City, Metro Manila</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="year"></span> Chell Dry Goods Hub.</p>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.querySelector('.nav');
+    hamburger?.addEventListener('click', () => {
+      const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', String(!expanded));
+      nav?.classList.toggle('open');
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard • Chell Dry Goods Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f8f8f5;
+    }
+    .admin-wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 220px;
+      background: #1c274c;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+    }
+    .sidebar .brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffd600;
+      padding: 0px 24px 18px;
+      border-bottom: 1px solid #29345c;
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+    .logo-container {
+      text-align: center;
+      padding: 20px 0 10px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .logo-container img {
+      display: block;
+      margin: 0 auto;
+    }
+    .sidebar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      flex: 1;
+    }
+    .sidebar li {
+      margin: 0;
+    }
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #b3b9d1;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 14px 24px;
+      border-left: 3px solid transparent;
+      transition: background 0.2s, color 0.2s;
+    }
+    .sidebar a.active, .sidebar a:hover {
+      background: #232f4b;
+      color: #ffd600;
+      border-left: 3px solid #ffd600;
+    }
+    .sidebar .section-label {
+      padding: 18px 24px 8px;
+      font-size: 0.85rem;
+      color: #8a90b8;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .main-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #f8f8f5;
+      min-height: 100vh;
+    }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      padding: 18px 36px 18px 36px;
+      border-bottom: 1px solid #ececec;
+    }
+    .topbar .search {
+      flex: 1;
+      margin-right: 24px;
+    }
+    .topbar input[type="text"] {
+      width: 100%;
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      background: #f9f9f9;
+      font-size: 1rem;
+    }
+    .topbar .user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      color: #222;
+    }
+    .topbar .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #ffd600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #1c274c;
+      font-weight: bold;
+    }
+    .main-content {
+      padding: 36px 48px 32px 48px;
+      flex: 1;
+    }
+    .main-content h2 {
+      margin: 0 0 22px 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1c274c;
+    }
+    .product-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 3px 16px rgba(44, 49, 73, 0.04);
+    }
+    .product-table th, .product-table td {
+      padding: 15px 14px;
+      text-align: left;
+    }
+    .product-table th {
+      background: #f5f6fa;
+      color: #7a7e9a;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-bottom: 1px solid #ececec;
+    }
+    .product-table td {
+      border-bottom: 1px solid #f2f2f2;
+      font-size: 1rem;
+      color: #232f4b;
+      background: #fff;
+      vertical-align: middle;
+    }
+    .product-table tr:last-child td {
+      border-bottom: none;
+    }
+    .product-img {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #f3f3f3;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .status {
+      display: inline-block;
+      padding: 5px 16px;
+      border-radius: 12px;
+      font-size: 0.94rem;
+      font-weight: 600;
+      background: #e7fbe6;
+      color: #1c8c36;
+    }
+    .status.low {
+      background: #fff7e6;
+      color: #b98418;
+    }
+    .status.inactive {
+      background: #f5f5f5;
+      color: #aaa;
+    }
+    .action-btn {
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      background: #fafafa;
+      color: #232f4b;
+      font-weight: 600;
+      font-size: 0.92rem;
+      margin-right: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .action-btn:hover {
+      background: #ffd600;
+      color: #1c274c;
+      border-color: #ffd600;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 6px rgba(255,214,0,0.3);
+    }
+    .action-btn:active {
+      transform: translateY(0);
+    }
+    .action-btn.archive {
+      background: #f8f9fa;
+      color: #6c757d;
+      border-color: #dee2e6;
+    }
+    .action-btn.archive:hover {
+      background: #6c757d;
+      color: #fff;
+      border-color: #6c757d;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 6px rgba(108,117,125,0.3);
+    }
+    .product-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(44, 49, 73, 0.06);
+    }
+    .product-table th, .product-table td {
+      padding: 16px 14px;
+      text-align: left;
+    }
+    .product-table th {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      color: #495057;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-bottom: 2px solid #dee2e6;
+    }
+    .product-table td {
+      border-bottom: 1px solid #f1f3f4;
+      font-size: 0.95rem;
+      color: #2c3e50;
+      background: #fff;
+      vertical-align: middle;
+    }
+    .product-table tr:hover td {
+      background: #f8f9ff;
+    }
+    .product-table tr:last-child td {
+      border-bottom: none;
+    }
+    .screenshot-gallery img {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+    .screenshot-gallery img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 24px rgba(44, 49, 73, 0.12);
+    }
+    .screenshot-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .screenshot-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(44, 49, 73, 0.15);
+    }
+    .user {
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logout-btn {
+      background: #dc3545;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: background 0.2s;
+      margin-left: 5px;
+    }
+    .logout-btn:hover {
+      background: #c82333;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+<div class="admin-wrapper">
+  <aside class="sidebar">
+    <div class="logo-container">
+      <img src="assets/img/basket.png" alt="Chell Dry Goods Hub" class="logo">
+    </div>
+    <div class="brand">Admin Dashboard</div>
+    <ul>
+      <li><a href="#overview" class="active"><span>🏠</span> Overview</a></li>
+      <div class="section-label">Inventory</div>
+      <li><a href="#products"><span>📦</span> Products</a></li>
+      <div class="section-label">User Management</div>
+      <li><a href="#manageusers"><span>👥</span> Manage Users</a></li>
+      <li><a href="#customers"><span>🛒</span> Customers</a></li>
+      <div class="section-label">Communication</div>
+      <li><a href="#messages"><span>💬</span> Messages</a></li>
+    </ul>
+  </aside>
+  <div class="main-area">
+    <div class="topbar">
+      <div class="search">
+        <input type="text" placeholder="Search products, orders, users...">
+      </div>
+      <div class="user">
+        <span class="avatar">A</span>
+        <span>Admin</span>
+        <a href="index.html" class="logout-btn" onclick="handleLogout(event)">Logout</a>
+      </div>
+    </div>
+    <div id="section-overview" class="main-content" style="display:none;">
+  <h2 style="margin-bottom:30px;">Dashboard Overview</h2>
+  <div style="display:flex;gap:22px;margin-bottom:32px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:180px;background:#f5fafd;padding:22px 18px;border-radius:14px;box-shadow:0 2px 8px rgba(44,49,73,0.04);display:flex;align-items:center;gap:14px;">
+      <div style="background:#e3f6ff;width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;">📦</div>
+      <div>
+        <div style="font-size:1.45rem;font-weight:700;">6</div>
+        <div style="font-size:0.97rem;color:#7a7e9a;">Total Products</div>
+      </div>
+    </div>
+    <div style="flex:1;min-width:180px;background:#f5fafd;padding:22px 18px;border-radius:14px;box-shadow:0 2px 8px rgba(44,49,73,0.04);display:flex;align-items:center;gap:14px;">
+      <div style="background:#e3ffe8;width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;">👥</div>
+      <div>
+        <div style="font-size:1.45rem;font-weight:700;">3</div>
+        <div style="font-size:0.97rem;color:#7a7e9a;">Total Customers</div>
+      </div>
+    </div>
+    <div style="flex:1;min-width:180px;background:#f5fafd;padding:22px 18px;border-radius:14px;box-shadow:0 2px 8px rgba(44,49,73,0.04);display:flex;align-items:center;gap:14px;">
+      <div style="background:#fff3cd;width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;">🛒</div>
+      <div>
+        <div style="font-size:1.45rem;font-weight:700;">89</div>
+        <div style="font-size:0.97rem;color:#7a7e9a;">Total Orders</div>
+      </div>
+    </div>
+    <div style="flex:1;min-width:180px;background:#f5fafd;padding:22px 18px;border-radius:14px;box-shadow:0 2px 8px rgba(44,49,73,0.04);display:flex;align-items:center;gap:14px;">
+      <div style="background:#ffe9d2;width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;">💰</div>
+      <div>
+        <div style="font-size:1.45rem;font-weight:700;">₱245,680</div>
+        <div style="font-size:0.97rem;color:#7a7e9a;">Revenue</div>
+      </div>
+    </div>
+  </div>
+  <div style="background:#fff;padding:18px 0 0 0;border-radius:14px;box-shadow:0 3px 12px rgba(44,49,73,0.03);">
+    <div style="padding:0 24px 12px 24px;font-size:1.12rem;font-weight:600;">Recent Orders</div>
+    <table style="width:100%;border-collapse:separate;border-spacing:0 2px;font-size:1rem;">
+      <thead>
+        <tr style="background:#f5f6fa;">
+          <th style="padding:10px 14px;text-align:left;color:#7a7e9a;font-size:0.97rem;">Order ID</th>
+          <th style="padding:10px 14px;text-align:left;color:#7a7e9a;font-size:0.97rem;">Customer</th>
+          <th style="padding:10px 14px;text-align:left;color:#7a7e9a;font-size:0.97rem;">Product</th>
+          <th style="padding:10px 14px;text-align:left;color:#7a7e9a;font-size:0.97rem;">Amount</th>
+          <th style="padding:10px 14px;text-align:left;color:#7a7e9a;font-size:0.97rem;">Status</th>
+          <th style="padding:10px 14px;text-align:left;color:#7a7e9a;font-size:0.97rem;">Date</th>
+          <th style="padding:10px 14px;text-align:left;color:#7a7e9a;font-size:0.97rem;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:#fff;">
+          <td style="padding:10px 14px;">ORD-001</td>
+          <td style="padding:10px 14px;">Maria Santos</td>
+          <td style="padding:10px 14px;">Premium Leather Handbag</td>
+          <td style="padding:10px 14px;">₱2,950</td>
+          <td style="padding:10px 14px;"><span style="background:#e7fbe6;color:#1c8c36;padding:4px 14px;border-radius:10px;font-weight:600;">Paid</span></td>
+          <td style="padding:10px 14px;">Nov 18, 2024</td>
+          <td style="padding:10px 14px;"><button class="action-btn">View</button></td>
+        </tr>
+        <tr style="background:#fff;">
+          <td style="padding:10px 14px;">ORD-002</td>
+          <td style="padding:10px 14px;">Juan Dela Cruz</td>
+          <td style="padding:10px 14px;">Classic Denim Jeans</td>
+          <td style="padding:10px 14px;">₱850</td>
+          <td style="padding:10px 14px;"><span style="background:#fffbe3;color:#b98418;padding:4px 14px;border-radius:10px;font-weight:600;">Pending</span></td>
+          <td style="padding:10px 14px;">Nov 17, 2024</td>
+          <td style="padding:10px 14px;"><button class="action-btn">View</button></td>
+        </tr>
+        <tr style="background:#fff;">
+          <td style="padding:10px 14px;">ORD-003</td>
+          <td style="padding:10px 14px;">Carlo Mendoza</td>
+          <td style="padding:10px 14px;">Sport Running Shoes</td>
+          <td style="padding:10px 14px;">₱1,320</td>
+          <td style="padding:10px 14px;"><span style="background:#e3f6ff;color:#1a6aa2;padding:4px 14px;border-radius:10px;font-weight:600;">Shipped</span></td>
+          <td style="padding:10px 14px;">Nov 17, 2024</td>
+          <td style="padding:10px 14px;"><button class="action-btn">View</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+    <div id="section-products" class="main-content">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2>Product Management</h2>
+        <button class="btn btn-primary" onclick="showAddProductModal()">+ Add Product</button>
+      </div>
+      <!-- Product Table -->
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Sold</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><img src="https://i.imgur.com/0y8Ftya.png" class="product-img" alt="Bag"></td>
+            <td>Premium Leather Handbag</td>
+            <td>Bags</td>
+            <td>₱2,950</td>
+            <td>39</td>
+            <td><strong style="color:#28a745;">124</strong></td>
+            <td><span class="status">Active</span></td>
+            <td><button class="action-btn">Edit</button><button class="action-btn archive">Archive</button><button class="action-btn">Delete</button></td>
+          </tr>
+          <tr>
+            <td><img src="https://i.imgur.com/4QfKuz1.png" class="product-img" alt="Shoes"></td>
+            <td>Sport Running Shoes</td>
+            <td>Shoes</td>
+            <td>₱1,320</td>
+            <td>25</td>
+            <td><strong style="color:#28a745;">89</strong></td>
+            <td><span class="status">Active</span></td>
+            <td><button class="action-btn">Edit</button><button class="action-btn archive">Archive</button><button class="action-btn">Delete</button></td>
+          </tr>
+          <tr>
+            <td><img src="https://i.imgur.com/6v6bQGQ.png" class="product-img" alt="Jeans"></td>
+            <td>Classic Denim Jeans</td>
+            <td>Pants</td>
+            <td>₱850</td>
+            <td>17</td>
+            <td><strong style="color:#28a745;">156</strong></td>
+            <td><span class="status">Active</span></td>
+            <td><button class="action-btn">Edit</button><button class="action-btn archive">Archive</button><button class="action-btn">Delete</button></td>
+          </tr>
+          <tr>
+            <td><img src="https://i.imgur.com/Ft6vQ9v.png" class="product-img" alt="Umbrella"></td>
+            <td>Compact Travel Umbrella</td>
+            <td>Umbrellas</td>
+            <td>₱450</td>
+            <td>42</td>
+            <td><strong style="color:#28a745;">78</strong></td>
+            <td><span class="status">Active</span></td>
+            <td><button class="action-btn">Edit</button><button class="action-btn archive">Archive</button><button class="action-btn">Delete</button></td>
+          </tr>
+          <tr>
+            <td><img src="https://i.imgur.com/8ZzO4jT.png" class="product-img" alt="Headphones"></td>
+            <td>Wireless Bluetooth Headphones</td>
+            <td>Electronics</td>
+            <td>₱1,650</td>
+            <td>12</td>
+            <td><strong style="color:#28a745;">45</strong></td>
+            <td><span class="status low">Low Stock</span></td>
+            <td><button class="action-btn">Edit</button><button class="action-btn archive">Archive</button><button class="action-btn">Delete</button></td>
+          </tr>
+          <tr>
+            <td><img src="https://i.imgur.com/2bFq2Qp.png" class="product-img" alt="Bottle"></td>
+            <td>Stainless Steel Water Bottle</td>
+            <td>Accessories</td>
+            <td>₱800</td>
+            <td>47</td>
+            <td><strong style="color:#28a745;">92</strong></td>
+            <td><span class="status">Active</span></td>
+            <td><button class="action-btn">Edit</button><button class="action-btn archive">Archive</button><button class="action-btn">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+</div>
+<div id="section-manageusers" class="main-content" style="display:none;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2>Manage Users</h2>
+    <div style="display: flex; gap: 10px;">
+      <input type="text" id="userSearchInput" placeholder="Search users..." style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; width: 200px;">
+      <button class="btn btn-primary" onclick="showAddUserModal()">+ Add User</button>
+    </div>
+  </div>
+  <div style="background:#fff;padding:20px;border-radius:14px;box-shadow:0 3px 12px rgba(44,49,73,0.03); overflow-x: auto;">
+    <table class="product-table" style="min-width: 800px;">
+      <thead>
+        <tr>
+          <th style="min-width: 200px;">Name</th>
+          <th style="min-width: 250px;">Email</th>
+          <th style="min-width: 120px;">Role</th>
+          <th style="min-width: 100px;">Status</th>
+          <th style="min-width: 120px;">Last Active</th>
+          <th style="min-width: 120px;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="avatar" style="width:36px;height:36px;font-size:0.9rem;">RD</span>
+              <div>
+                <div style="font-weight:600;">Rachel Dizon</div>
+                <div style="font-size:0.85rem;color:#7a7e9a;">rachel.dizon@chelldrygoods.com</div>
+              </div>
+            </div>
+          </td>
+          <td>rachel.dizon@chelldrygoods.com</td>
+          <td><span class="status" style="background:#e3f6ff;color:#1a6aa2;">Super Admin</span></td>
+          <td><span class="status">Active</span></td>
+          <td>2 hours ago</td>
+          <td><button class="action-btn">Edit</button><button class="action-btn">View</button></td>
+        </tr>
+        <tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="avatar" style="width:36px;height:36px;font-size:0.9rem;">MR</span>
+              <div>
+                <div style="font-weight:600;">Marco Reyes</div>
+                <div style="font-size:0.85rem;color:#7a7e9a;">marco.reyes@chelldrygoods.com</div>
+              </div>
+            </div>
+          </td>
+          <td>marco.reyes@chelldrygoods.com</td>
+          <td><span class="status" style="background:#f0f9ff;color:#0369a1;">Inventory Lead</span></td>
+          <td><span class="status">Active</span></td>
+          <td>1 day ago</td>
+          <td><button class="action-btn">Edit</button><button class="action-btn">View</button></td>
+        </tr>
+        <tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="avatar" style="width:36px;height:36px;font-size:0.9rem;">AS</span>
+              <div>
+                <div style="font-weight:600;">Ana Soriano</div>
+                <div style="font-size:0.85rem;color:#7a7e9a;">ana.soriano@chelldrygoods.com</div>
+              </div>
+            </div>
+          </td>
+          <td>ana.soriano@chelldrygoods.com</td>
+          <td><span class="status" style="background:#ecfdf5;color:#059669;">Customer Success</span></td>
+          <td><span class="status">Active</span></td>
+          <td>3 hours ago</td>
+          <td><button class="action-btn">Edit</button><button class="action-btn">View</button></td>
+        </tr>
+        <tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="avatar" style="width:36px;height:36px;font-size:0.9rem;">JC</span>
+              <div>
+                <div style="font-weight:600;">John Cruz</div>
+                <div style="font-size:0.85rem;color:#7a7e9a;">john.cruz@chelldrygoods.com</div>
+              </div>
+            </div>
+          </td>
+          <td>john.cruz@chelldrygoods.com</td>
+          <td><span class="status" style="background:#fef3c7;color:#d97706;">Staff</span></td>
+          <td><span class="status low">Inactive</span></td>
+          <td>5 days ago</td>
+          <td><button class="action-btn">Edit</button><button class="action-btn archive">Reactivate</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div id="section-customers" class="main-content" style="display:none;">
+  <h2>Customer Orders</h2>
+  <div style="background:#fff;padding:36px 24px;border-radius:14px;box-shadow:0 3px 12px rgba(44,49,73,0.03);">
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>Order ID</th>
+          <th>Products</th>
+          <th>Total Amount</th>
+          <th>Order Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="avatar" style="width:36px;height:36px;font-size:0.9rem;background:#e3f6ff;color:#1a6aa2;">CM</span>
+              <div>
+                <div style="font-weight:600;">Café Mila</div>
+                <div style="font-size:0.85rem;color:#7a7e9a;">Quezon City</div>
+              </div>
+            </div>
+          </td>
+          <td><strong>#ORD-2024-001</strong></td>
+          <td>
+            <div style="font-size:0.9rem;">
+              <div>Premium Leather Handbag (2x)</div>
+              <div style="color:#7a7e9a;">Stainless Steel Bottle (5x)</div>
+            </div>
+          </td>
+          <td><strong style="color:#28a745;">₱9,900</strong></td>
+          <td>Nov 15, 2024</td>
+          <td><span style="background:#e3f6ff;color:#1a6aa2;padding:4px 14px;border-radius:10px;font-weight:600;">Shipped</span></td>
+          <td><button class="action-btn">View</button><button class="action-btn">Track</button></td>
+        </tr>
+        <tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="avatar" style="width:36px;height:36px;font-size:0.9rem;background:#ecfdf5;color:#059669;">BW</span>
+              <div>
+                <div style="font-weight:600;">Barrio Wholesale</div>
+                <div style="font-size:0.85rem;color:#7a7e9a;">Cebu City</div>
+              </div>
+            </div>
+          </td>
+          <td><strong>#ORD-2024-002</strong></td>
+          <td>
+            <div style="font-size:0.9rem;">
+              <div>Sport Running Shoes (10x)</div>
+              <div style="color:#7a7e9a;">Classic Denim Jeans (8x)</div>
+            </div>
+          </td>
+          <td><strong style="color:#28a745;">₱20,600</strong></td>
+          <td>Nov 17, 2024</td>
+          <td><span style="background:#dcfce7;color:#166534;padding:4px 14px;border-radius:10px;font-weight:600;">Delivered</span></td>
+          <td><button class="action-btn">View</button><button class="action-btn">Invoice</button></td>
+        </tr>
+        <tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="avatar" style="width:36px;height:36px;font-size:0.9rem;background:#fef3c7;color:#d97706;">B1</span>
+              <div>
+                <div style="font-weight:600;">Barangay 14 Coop</div>
+                <div style="font-size:0.85rem;color:#7a7e9a;">Iloilo</div>
+              </div>
+            </div>
+          </td>
+          <td><strong>#ORD-2024-003</strong></td>
+          <td>
+            <div style="font-size:0.9rem;">
+              <div>Compact Travel Umbrella (20x)</div>
+              <div style="color:#7a7e9a;">Wireless Headphones (3x)</div>
+            </div>
+          </td>
+          <td><strong style="color:#28a745;">₱14,550</strong></td>
+          <td>Nov 18, 2024</td>
+          <td><span style="background:#fef3c7;color:#d97706;padding:4px 14px;border-radius:10px;font-weight:600;">Processing</span></td>
+          <td><button class="action-btn">View</button><button class="action-btn archive">Cancel</button></td>
+        </tr>
+        <tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="avatar" style="width:36px;height:36px;font-size:0.9rem;background:#f0f9ff;color:#0369a1;">SM</span>
+              <div>
+                <div style="font-weight:600;">Sunrise Merchants</div>
+                <div style="font-size:0.85rem;color:#7a7e9a;">Manila</div>
+              </div>
+            </div>
+          </td>
+          <td><strong>#ORD-2024-004</strong></td>
+          <td>
+            <div style="font-size:0.9rem;">
+              <div>Wireless Bluetooth Headphones (15x)</div>
+              <div style="color:#7a7e9a;">Sport Running Shoes (5x)</div>
+            </div>
+          </td>
+          <td><strong style="color:#28a745;">₱31,275</strong></td>
+          <td>Nov 19, 2024</td>
+          <td><span style="background:#e0e7ff;color:#3730a3;padding:4px 14px;border-radius:10px;font-weight:600;">Pending</span></td>
+          <td><button class="action-btn">View</button><button class="action-btn">Process</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div id="section-messages" class="main-content" style="display:none;">
+  <h2>Messages</h2>
+  <div style="background:#fff;padding:36px 24px;border-radius:14px;box-shadow:0 3px 12px rgba(44,49,73,0.03);">
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>Sender</th>
+          <th>Subject</th>
+          <th>Message</th>
+          <th>Date</th>
+          <th>Priority</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="avatar" style="width:36px;height:36px;font-size:0.9rem;background:#fef3c7;color:#d97706;">JV</span>
+              <div>
+                <div style="font-weight:600;">Jessa Villanueva</div>
+                <div style="font-size:0.85rem;color:#7a7e9a;">jessa.v@cafemila.com</div>
+              </div>
+            </div>
+          </td>
+          <td><strong>Price List Request</strong></td>
+          <td>
+            <div style="font-size:0.9rem;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+              Need updated price list for bulk ordering of premium leather handbags and stainless steel bottles...
+            </div>
+          </td>
+          <td>Nov 19, 2024</td>
+          <td><span class="status" style="background:#fef3c7;color:#d97706;">Medium</span></td>
+          <td><button class="action-btn">Reply</button><button class="action-btn">View</button></td>
+        </tr>
+        <tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="avatar" style="width:36px;height:36px;font-size:0.9rem;background:#e3f6ff;color:#1a6aa2;">EJ</span>
+              <div>
+                <div style="font-weight:600;">EJ Santos</div>
+                <div style="font-size:0.85rem;color:#7a7e9a;">ej.santos@barrio.com</div>
+              </div>
+            </div>
+          </td>
+          <td><strong>Delivery Reschedule</strong></td>
+          <td>
+            <div style="font-size:0.9rem;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+              Request to reschedule delivery for order #ORD-2024-002 due to warehouse unavailability...
+            </div>
+          </td>
+          <td>Nov 18, 2024</td>
+          <td><span class="status" style="background:#dc3545;color:#fff;">High</span></td>
+          <td><button class="action-btn">Reply</button><button class="action-btn archive">Resolve</button></td>
+        </tr>
+        <tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="avatar" style="width:36px;height:36px;font-size:0.9rem;background:#ecfdf5;color:#059669;">B1</span>
+              <div>
+                <div style="font-weight:600;">Barangay 14 Coop</div>
+                <div style="font-size:0.85rem;color:#7a7e9a;">admin@b14coop.gov</div>
+              </div>
+            </div>
+          </td>
+          <td><strong>Bulk Inquiry</strong></td>
+          <td>
+            <div style="font-size:0.9rem;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+              Interested in bulk corn grit supply for community feeding program. Need pricing for 500kg monthly...
+            </div>
+          </td>
+          <td>Nov 17, 2024</td>
+          <td><span class="status" style="background:#e3f6ff;color:#1a6aa2;">Low</span></td>
+          <td><button class="action-btn">Reply</button><button class="action-btn">Forward</button></td>
+        </tr>
+        <tr>
+          <td>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="avatar" style="width:36px;height:36px;font-size:0.9rem;background:#f0f9ff;color:#0369a1;">MR</span>
+              <div>
+                <div style="font-weight:600;">Marco Reyes</div>
+                <div style="font-size:0.85rem;color:#7a7e9a;">marco.reyes@chelldrygoods.com</div>
+              </div>
+            </div>
+          </td>
+          <td><strong>Inventory Alert</strong></td>
+          <td>
+            <div style="font-size:0.9rem;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+              Wireless headphones stock critically low. Only 12 units remaining. Need to reorder soon...
+            </div>
+          </td>
+          <td>Nov 16, 2024</td>
+          <td><span class="status" style="background:#dc3545;color:#fff;">High</span></td>
+          <td><button class="action-btn">View</button><button class="action-btn archive">Archive</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div id="section-messages" class="main-content" style="display:none;">
+  <h2>Messages</h2>
+  <div style="background:#fff;padding:36px 24px;border-radius:14px;box-shadow:0 3px 12px rgba(44,49,73,0.03);">
+    <ul style="padding-left:0;list-style:none;">
+      <li><strong>Jessa Villanueva:</strong> Need updated price list</li>
+      <li><strong>EJ Santos:</strong> Delivery reschedule request</li>
+      <li><strong>Barangay 14 Coop:</strong> Bulk corn grit inquiry</li>
+    </ul>
+  </div>
+</div>
+<div id="section-manageusers" class="main-content" style="display:none;">
+  <h2>Manage Users</h2>
+  <div style="background:#fff;padding:36px 24px;border-radius:14px;box-shadow:0 3px 12px rgba(44,49,73,0.03);">
+    <ul style="padding-left:0;list-style:none;">
+      <li><strong>Rachel Dizon</strong> (Super Admin)</li>
+      <li><strong>Marco Reyes</strong> (Inventory Lead)</li>
+      <li><strong>Ana Soriano</strong> (Customer Success)</li>
+    </ul>
+  </div>
+</div>
+<div id="section-customers" class="main-content" style="display:none;">
+  <h2>Customers</h2>
+  <div style="background:#fff;padding:36px 24px;border-radius:14px;box-shadow:0 3px 12px rgba(44,49,73,0.03);">
+    <ul style="padding-left:0;list-style:none;">
+      <li><strong>Café Mila</strong> (Quezon City)</li>
+      <li><strong>Barrio Wholesale</strong> (Cebu City)</li>
+      <li><strong>Barangay 14 Coop</strong> (Iloilo)</li>
+    </ul>
+  </div>
+</div>
+<div id="section-messages" class="main-content" style="display:none;">
+  <h2>Messages</h2>
+  <div style="background:#fff;padding:36px 24px;border-radius:14px;box-shadow:0 3px 12px rgba(44,49,73,0.03);">
+    <ul style="padding-left:0;list-style:none;">
+      <li><strong>Jessa Villanueva:</strong> Need updated price list</li>
+      <li><strong>EJ Santos:</strong> Delivery reschedule request</li>
+      <li><strong>Barangay 14 Coop:</strong> Bulk corn grit inquiry</li>
+    </ul>
+  </div>
+</div>
+</div>
+</div>
+</body>
+</html>
+<script>
+  // Sidebar navigation active state and content switching
+  document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.sidebar a');
+    const sections = {
+      overview: document.getElementById('section-overview'),
+      products: document.getElementById('section-products'),
+      manageusers: document.getElementById('section-manageusers'),
+      customers: document.getElementById('section-customers'),
+      messages: document.getElementById('section-messages')
+    };
+    
+    // Hide all sections initially
+    Object.values(sections).forEach(sec => sec && (sec.style.display = 'none'));
+    
+    // Show Overview by default
+    if (sections.overview) {
+      sections.overview.style.display = '';
+    }
+    
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        Object.values(sections).forEach(sec => sec && (sec.style.display = 'none'));
+        const id = link.getAttribute('href').replace('#', '');
+        if (sections[id]) sections[id].style.display = '';
+      });
+    });
+    
+    // Reset form function
+    window.resetAddProductForm = function() {
+      // Function kept for compatibility but form no longer exists
+    };
+    
+    // Logout function
+    window.handleLogout = function(event) {
+      event.preventDefault();
+      if (confirm('Are you sure you want to logout?')) {
+        window.location.href = 'index.html';
+      }
+    };
+    
+    // Notification system
+    function showNotification(message, type = 'info') {
+      // Remove any existing notifications
+      const existing = document.querySelector('.notification');
+      if (existing) {
+        existing.remove();
+      }
+      
+      const notification = document.createElement('div');
+      notification.className = `notification notification-${type}`;
+      notification.textContent = message;
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 16px 24px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 600;
+        z-index: 1000;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        max-width: 300px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      `;
+      
+      // Set background color based on type
+      if (type === 'success') {
+        notification.style.background = '#28a745';
+      } else if (type === 'error') {
+        notification.style.background = '#dc3545';
+      } else {
+        notification.style.background = '#17a2b8';
+      }
+      
+      document.body.appendChild(notification);
+      
+      // Animate in
+      setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+      }, 100);
+      
+      // Remove after 3 seconds
+      setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+          }
+        }, 300);
+      }, 3000);
+    }
+  });
+</script>
+
+<!-- Add Product Modal -->
+<div id="addProductModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 12px; width: 90%; max-width: 500px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <h3 style="margin: 0 0 20px 0; color: #1c274c;">Add New Product</h3>
+    <form id="addProductForm">
+      <div style="margin-bottom: 15px;">
+        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #5d4822;">Product Name</label>
+        <input type="text" id="productName" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+      </div>
+      <div style="margin-bottom: 15px;">
+        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #5d4822;">Category</label>
+        <select id="productCategory" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+          <option value="">Select Category</option>
+          <option value="Bags">Bags</option>
+          <option value="Shoes">Shoes</option>
+          <option value="Pants">Pants</option>
+          <option value="Shirts">Shirts</option>
+          <option value="Accessories">Accessories</option>
+        </select>
+      </div>
+      <div style="margin-bottom: 15px;">
+        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #5d4822;">Price</label>
+        <input type="number" id="productPrice" required min="0" step="0.01" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+      </div>
+      <div style="margin-bottom: 15px;">
+        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #5d4822;">Stock Quantity</label>
+        <input type="number" id="productStock" required min="0" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+      </div>
+      <div style="margin-bottom: 15px;">
+        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #5d4822;">Image URL</label>
+        <input type="url" id="productImage" placeholder="https://example.com/image.jpg" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+      </div>
+      <div style="display: flex; gap: 10px; justify-content: flex-end;">
+        <button type="button" onclick="hideAddProductModal()" style="padding: 10px 20px; border: 1px solid #ddd; background: #f5f5f5; border-radius: 6px; cursor: pointer;">Cancel</button>
+        <button type="submit" style="padding: 10px 20px; background: #1c274c; color: white; border: none; border-radius: 6px; cursor: pointer;">Add Product</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Edit Product Modal -->
+<div id="editProductModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 12px; width: 90%; max-width: 500px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <h3 style="margin: 0 0 20px 0; color: #1c274c;">Edit Product</h3>
+    <form id="editProductForm">
+      <input type="hidden" id="editProductId">
+      <div style="margin-bottom: 15px;">
+        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #5d4822;">Product Name</label>
+        <input type="text" id="editProductName" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+      </div>
+      <div style="margin-bottom: 15px;">
+        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #5d4822;">Category</label>
+        <select id="editProductCategory" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+          <option value="Bags">Bags</option>
+          <option value="Shoes">Shoes</option>
+          <option value="Pants">Pants</option>
+          <option value="Shirts">Shirts</option>
+          <option value="Accessories">Accessories</option>
+        </select>
+      </div>
+      <div style="margin-bottom: 15px;">
+        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #5d4822;">Price</label>
+        <input type="number" id="editProductPrice" required min="0" step="0.01" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+      </div>
+      <div style="margin-bottom: 15px;">
+        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #5d4822;">Stock Quantity</label>
+        <input type="number" id="editProductStock" required min="0" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+      </div>
+      <div style="margin-bottom: 15px;">
+        <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #5d4822;">Image URL</label>
+        <input type="url" id="editProductImage" placeholder="https://example.com/image.jpg" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+      </div>
+      <div style="display: flex; gap: 10px; justify-content: flex-end;">
+        <button type="button" onclick="hideEditProductModal()" style="padding: 10px 20px; border: 1px solid #ddd; background: #f5f5f5; border-radius: 6px; cursor: pointer;">Cancel</button>
+        <button type="submit" style="padding: 10px 20px; background: #1c274c; color: white; border: none; border-radius: 6px; cursor: pointer;">Update Product</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+// Product CRUD Operations
+let products = [
+  { id: 1, name: 'Premium Leather Handbag', category: 'Bags', price: 2950, stock: 39, sold: 124, image: 'https://i.imgur.com/0y8Ftya.png', status: 'Active' },
+  { id: 2, name: 'Sport Running Shoes', category: 'Shoes', price: 1320, stock: 25, sold: 89, image: 'https://i.imgur.com/4QfKuz1.png', status: 'Active' },
+  { id: 3, name: 'Classic Denim Jeans', category: 'Pants', price: 850, stock: 17, sold: 156, image: 'https://i.imgur.com/6v6bQGQ.png', status: 'Active' },
+  { id: 4, name: 'Folding Umbrella', category: 'Accessories', price: 320, stock: 45, sold: 67, image: 'https://i.imgur.com/Ft6vQ9v.png', status: 'Active' }
+];
+
+let nextProductId = 5;
+
+// Show Add Product Modal
+function showAddProductModal() {
+  document.getElementById('addProductModal').style.display = 'block';
+}
+
+// Hide Add Product Modal
+function hideAddProductModal() {
+  document.getElementById('addProductModal').style.display = 'none';
+  document.getElementById('addProductForm').reset();
+}
+
+// Show Edit Product Modal
+function showEditProductModal(productId) {
+  const product = products.find(p => p.id === productId);
+  if (product) {
+    document.getElementById('editProductId').value = product.id;
+    document.getElementById('editProductName').value = product.name;
+    document.getElementById('editProductCategory').value = product.category;
+    document.getElementById('editProductPrice').value = product.price;
+    document.getElementById('editProductStock').value = product.stock;
+    document.getElementById('editProductImage').value = product.image;
+    document.getElementById('editProductModal').style.display = 'block';
+  }
+}
+
+// Hide Edit Product Modal
+function hideEditProductModal() {
+  document.getElementById('editProductModal').style.display = 'none';
+  document.getElementById('editProductForm').reset();
+}
+
+// Add Product Form Submit
+document.getElementById('addProductForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const newProduct = {
+    id: nextProductId++,
+    name: document.getElementById('productName').value,
+    category: document.getElementById('productCategory').value,
+    price: parseFloat(document.getElementById('productPrice').value),
+    stock: parseInt(document.getElementById('productStock').value),
+    sold: 0,
+    image: document.getElementById('productImage').value || 'https://i.imgur.com/default.png',
+    status: 'Active'
+  };
+  
+  products.push(newProduct);
+  renderProducts();
+  hideAddProductModal();
+  showNotification('Product added successfully!');
+});
+
+// Edit Product Form Submit
+document.getElementById('editProductForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const productId = parseInt(document.getElementById('editProductId').value);
+  const productIndex = products.findIndex(p => p.id === productId);
+  
+  if (productIndex !== -1) {
+    products[productIndex] = {
+      ...products[productIndex],
+      name: document.getElementById('editProductName').value,
+      category: document.getElementById('editProductCategory').value,
+      price: parseFloat(document.getElementById('editProductPrice').value),
+      stock: parseInt(document.getElementById('editProductStock').value),
+      image: document.getElementById('editProductImage').value || products[productIndex].image
+    };
+    
+    renderProducts();
+    hideEditProductModal();
+    showNotification('Product updated successfully!');
+  }
+});
+
+// Delete Product
+function deleteProduct(productId) {
+  if (confirm('Are you sure you want to delete this product?')) {
+    products = products.filter(p => p.id !== productId);
+    renderProducts();
+    showNotification('Product deleted successfully!');
+  }
+}
+
+// Archive Product
+function archiveProduct(productId) {
+  const product = products.find(p => p.id === productId);
+  if (product) {
+    product.status = product.status === 'Active' ? 'Archived' : 'Active';
+    renderProducts();
+    showNotification(`Product ${product.status === 'Active' ? 'activated' : 'archived'} successfully!`);
+  }
+}
+
+// Render Products Table
+function renderProducts() {
+  const tbody = document.querySelector('#section-products .product-table tbody');
+  if (!tbody) return;
+  
+  tbody.innerHTML = products.map(product => `
+    <tr>
+      <td><img src="${product.image}" class="product-img" alt="${product.name}"></td>
+      <td>${product.name}</td>
+      <td>${product.category}</td>
+      <td>₱${product.price.toLocaleString()}</td>
+      <td>${product.stock}</td>
+      <td><strong style="color:#28a745;">${product.sold}</strong></td>
+      <td><span class="status">${product.status}</span></td>
+      <td>
+        <button class="action-btn" onclick="showEditProductModal(${product.id})">Edit</button>
+        <button class="action-btn archive" onclick="archiveProduct(${product.id})">${product.status === 'Active' ? 'Archive' : 'Activate'}</button>
+        <button class="action-btn" onclick="deleteProduct(${product.id})">Delete</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+// Show Notification
+function showNotification(message) {
+  const notification = document.createElement('div');
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #28a745;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 6px;
+    z-index: 2000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  `;
+  notification.textContent = message;
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    if (notification.parentNode) {
+      notification.parentNode.removeChild(notification);
+    }
+  }, 3000);
+}
+
+// Initialize products table on page load
+document.addEventListener('DOMContentLoaded', function() {
+  renderProducts();
+});
+</script>
+  
+      
